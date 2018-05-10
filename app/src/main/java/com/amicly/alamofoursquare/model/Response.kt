@@ -11,8 +11,4 @@ class Response {
     @SerializedName("confident")
     @Expose
     var isConfident: Boolean = false
-    @SerializedName("geocode")
-    @Expose
-    var geocode: Geocode? = null
-
 }
