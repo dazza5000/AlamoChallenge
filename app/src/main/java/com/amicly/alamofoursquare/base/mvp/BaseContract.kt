@@ -8,7 +8,5 @@ interface BaseContract {
         fun showProgress(show : Boolean)
     }
 
-    interface Presenter {
-
-    }
+    interface Presenter { }
 }

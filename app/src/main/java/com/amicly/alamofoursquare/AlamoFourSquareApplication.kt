@@ -1,5 +1,6 @@
 package com.amicly.alamofoursquare
 
+import com.amicly.playerbase.di.component.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import timber.log.Timber

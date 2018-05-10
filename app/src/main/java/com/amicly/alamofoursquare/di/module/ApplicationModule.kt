@@ -1,4 +1,4 @@
-package com.amicly.playerbase.di.module
+package com.amicly.alamofoursquare.di.module
 
 import android.app.Application
 import android.content.Context

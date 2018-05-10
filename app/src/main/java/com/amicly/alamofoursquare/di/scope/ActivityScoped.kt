@@ -1,4 +1,4 @@
-package com.amicly.playerbase.di.scope
+package com.amicly.alamofoursquare.di.scope
 
 import java.lang.annotation.Documented
 import javax.inject.Scope

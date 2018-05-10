@@ -1,9 +1,10 @@
 package com.amicly.playerbase.di.component
 
 import com.amicly.alamofoursquare.AlamoFourSquareApplication
-import com.amicly.playerbase.di.module.ActivityBindingModule
-import com.amicly.playerbase.di.module.ApplicationModule
-import com.amicly.playerbase.di.module.DataModule
+import com.amicly.alamofoursquare.di.module.ActivityBindingModule
+import com.amicly.alamofoursquare.di.module.ApplicationModule
+import com.amicly.alamofoursquare.di.module.DataModule
+
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

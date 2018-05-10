@@ -1,15 +1,19 @@
-package com.amicly.playerbase.di.module
+package com.amicly.alamofoursquare.di.module
 
-import com.amicly.playerbase.di.scope.ActivityScoped
+import com.amicly.alamofoursquare.common.scheduler.AppSchedulerProvider
+import com.amicly.alamofoursquare.common.scheduler.SchedulerProvider
 import dagger.Module
+import dagger.Provides
 
 
 /**
  * Created by darrankelinske on 2/11/18.
  */
 
-@ActivityScoped
 @Module
-public class DataModule {
-
+class DataModule {
+    @Provides
+    internal fun provideSchedulerProvider(): SchedulerProvider {
+        return AppSchedulerProvider()
+    }
 }
