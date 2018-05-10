@@ -36,6 +36,7 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:2.1.8"
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
     // Support
     implementation deps.support.app_compat
     implementation deps.support.recyclerview
@@ -47,6 +48,8 @@ dependencies {
     implementation deps.lifecycle.java8
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation deps.okhttp_logging_interceptor
     implementation deps.glide.runtime
 
     implementation deps.dagger.runtime
