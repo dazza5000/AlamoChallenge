@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class SearchActivity : BaseActivity(), SearchContract.View {
 
-    @Inject lateinit var presenter : SearchPresenter
+    @Inject lateinit var searchPresenter : SearchPresenter
 
     private var venueRecyclerAdapter: VenueRecyclerAdapter? = null
 
@@ -21,9 +21,10 @@ class SearchActivity : BaseActivity(), SearchContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        venueRecyclerAdapter = VenueRecyclerAdapter(ArrayList(), object : VenueRecyclerAdapter.VenueClickListener {
+        venueRecyclerAdapter = VenueRecyclerAdapter(ArrayList(),
+                object : VenueRecyclerAdapter.VenueClickListener {
             override fun onVenueClick(venue : Venue) {
-                presenter.selectEvent(venue)
+                searchPresenter.selectEvent(venue)
             }
         })
         recyclerview_venues.adapter = venueRecyclerAdapter
@@ -40,9 +41,14 @@ class SearchActivity : BaseActivity(), SearchContract.View {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+                searchPresenter.searchQueryUpdated(newText)
                 return false
             }
         })
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun showVenues(venues : List<Venue>) {
+        venueRecyclerAdapter?.setVenues(venues)
     }
 }

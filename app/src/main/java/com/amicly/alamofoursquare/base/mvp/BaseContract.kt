@@ -6,6 +6,7 @@ package com.amicly.playerbase.base.mvp
 interface BaseContract {
     interface View {
         fun showProgress(show : Boolean)
+        fun showNotification(text : String)
     }
 
     interface Presenter { }

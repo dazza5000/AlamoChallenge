@@ -12,4 +12,8 @@ open class BaseActivity : DaggerAppCompatActivity(), BaseContract.View {
     override fun showProgress(show: Boolean) {
         toast("loading...")
     }
+
+    override fun showNotification(text: String) {
+        toast(text)
+    }
 }

@@ -1,5 +1,6 @@
 package com.amicly.playerbase.di.component
 
+import android.app.Application
 import com.amicly.alamofoursquare.AlamoFourSquareApplication
 import com.amicly.alamofoursquare.di.module.ActivityBindingModule
 import com.amicly.alamofoursquare.di.module.ApplicationModule
@@ -25,7 +26,7 @@ interface ApplicationComponent : AndroidInjector<AlamoFourSquareApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun application(application: AlamoFourSquareApplication): Builder
+        fun application(application: Application): Builder
 
         fun build(): ApplicationComponent
     }

@@ -6,6 +6,8 @@ import dagger.Binds
 import dagger.Module
 
 
+
+
 /**
  * Created by darrankelinske on 2/11/18.
  */
@@ -13,4 +15,5 @@ import dagger.Module
 abstract class SearchModule {
     @Binds
     abstract fun searchView(searchActivity : SearchActivity): SearchContract.View
+
 }

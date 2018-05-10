@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.amicly.alamofoursquare.common.scheduler.AppSchedulerProvider
 import com.amicly.alamofoursquare.common.scheduler.SchedulerProvider
+import com.amicly.alamofoursquare.data.remote.FourSquareService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -47,6 +48,7 @@ class DataModule {
                 .addInterceptor(HttpLoggingInterceptor()
                         .setLevel(HttpLoggingInterceptor.Level.BODY))
                 .addNetworkInterceptor(ResponseCacheInterceptor())
+                .addInterceptor(ClientIdInterceptor())
                 .cache(cache)
                 .connectTimeout(33, TimeUnit.SECONDS)
                 .readTimeout(33, TimeUnit.SECONDS)
@@ -58,7 +60,7 @@ class DataModule {
     internal fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://api.seatgeek.com/2/")
+                .baseUrl("https://api.foursquare.com/v2/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
@@ -70,6 +72,11 @@ class DataModule {
         return context.getSharedPreferences(PREFS_NAME, 0)
     }
 
+    @Provides
+    @Singleton
+    internal fun provideSeatGeekService(retrofit: Retrofit): FourSquareService {
+        return retrofit.create(FourSquareService::class.java)
+    }
     @Provides
     @Singleton
     internal fun provideSchedulerProvider(): SchedulerProvider {
@@ -85,6 +92,19 @@ class DataModule {
             return response.newBuilder()
                     .header("Cache-Control", "public, max-age=7777777")
                     .build()
+        }
+    }
+
+    private inner class ClientIdInterceptor : Interceptor {
+        @Throws(IOException::class)
+        override fun intercept(chain: Interceptor.Chain): Response {
+            var request = chain.request()
+            val httpUrl = request.url().newBuilder()
+                    .addQueryParameter("client_id", "RV5EALWWU2UQEAXUQVIEKFSNJBI55PFPCMIGS2450YPFD0TZ")
+                    .addQueryParameter("client_secret", "MVJONWL2OTLGKSO0U0KNCD1H2XJVPRW4IKBBKOFZ1AJ4TX4P")
+                    .build()
+            request = request.newBuilder().url(httpUrl).build()
+            return chain.proceed(request)
         }
     }
 }
