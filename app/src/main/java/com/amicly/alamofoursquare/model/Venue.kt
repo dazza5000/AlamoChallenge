@@ -1,8 +1,6 @@
 package com.amicly.alamofoursquare.model
 
 import android.location.Location
-import android.view.Menu
-
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -38,10 +36,4 @@ class Venue {
     @SerializedName("storeId")
     @Expose
     var storeId: String? = null
-    @SerializedName("hasMenu")
-    @Expose
-    var isHasMenu: Boolean = false
-    @SerializedName("menu")
-    @Expose
-    var menu: Menu? = null
 }

@@ -57,7 +57,7 @@ class SearchPresenter @Inject constructor(private val view : SearchContract.View
                     }
 
                     override fun onSuccess(searchResult: FourSquareVenueSearchResult) {
-                            searchResult.response?.venues?.apply {
+                            searchResult.response?.venues?.run {
                                 view.showVenues(this)
                             }
                     }

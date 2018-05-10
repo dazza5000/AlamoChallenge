@@ -15,13 +15,11 @@ class VenueRecyclerAdapter(private var venues: List<Venue>?,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VenueViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_venue, parent,
                 false)
-        return VenueViewHolder(view)
+        return VenueViewHolder(view, venueClickListener)
     }
 
     override fun onBindViewHolder(holder: VenueViewHolder, position: Int) {
         val venue = venues!![position]
-
-        holder.itemView.setOnClickListener { _ -> venueClickListener.onVenueClick(venue) }
         holder.bindEvent(venue)
     }
 
@@ -34,17 +32,12 @@ class VenueRecyclerAdapter(private var venues: List<Venue>?,
         notifyDataSetChanged()
     }
 
-    inner class VenueViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-            View.OnClickListener {
+    inner class VenueViewHolder(private val venueItemView: View,
+                                private val venueClickListener: VenueClickListener) : RecyclerView.ViewHolder(venueItemView) {
 
-        private var event: Venue? = null
-
-        override fun onClick(v: View) {
-        }
-
-        fun bindEvent(event: Venue) {
-            this.event = event
-            itemView.text_view_event_name.text = event.id.toString()
+        fun bindEvent(venue: Venue) {
+            venueItemView.text_view_event_name.text = venue.name
+            venueItemView.setOnClickListener { _ -> venueClickListener.onVenueClick(venue) }
         }
     }
 

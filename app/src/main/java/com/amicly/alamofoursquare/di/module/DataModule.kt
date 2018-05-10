@@ -102,6 +102,7 @@ class DataModule {
             val httpUrl = request.url().newBuilder()
                     .addQueryParameter("client_id", "RV5EALWWU2UQEAXUQVIEKFSNJBI55PFPCMIGS2450YPFD0TZ")
                     .addQueryParameter("client_secret", "MVJONWL2OTLGKSO0U0KNCD1H2XJVPRW4IKBBKOFZ1AJ4TX4P")
+                    .addQueryParameter("v", "20180323")
                     .build()
             request = request.newBuilder().url(httpUrl).build()
             return chain.proceed(request)
