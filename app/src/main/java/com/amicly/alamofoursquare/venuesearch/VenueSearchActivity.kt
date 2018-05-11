@@ -9,9 +9,9 @@ import com.amicly.playerbase.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
 
-class SearchActivity : BaseActivity(), SearchContract.View {
+class VenueSearchActivity : BaseActivity(), VenueSearchContract.View {
 
-    @Inject lateinit var searchPresenter : SearchPresenter
+    @Inject lateinit var searchPresenter : VenueSearchPresenter
     @Inject lateinit var venueRecyclerAdapter: VenueRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

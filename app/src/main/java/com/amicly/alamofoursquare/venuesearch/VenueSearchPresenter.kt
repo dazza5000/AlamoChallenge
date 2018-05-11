@@ -13,9 +13,9 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
-class SearchPresenter @Inject constructor(private val view : SearchContract.View,
-                                          private val fourSquareService: FourSquareService,
-                                          private val schedulerProvider: SchedulerProvider) : SearchContract.Presenter {
+class VenueSearchPresenter @Inject constructor(private val view : VenueSearchContract.View,
+                                               private val fourSquareService: FourSquareService,
+                                               private val schedulerProvider: SchedulerProvider) : VenueSearchContract.Presenter {
 
     private val searchStringSubject = BehaviorSubject.create<String>()
     private val behaviorDisposable = CompositeDisposable()
