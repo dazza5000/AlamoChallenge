@@ -48,6 +48,8 @@ class VenueRecyclerAdapter (private var venues: List<Venue>,
         super.onViewRecycled(holder)
         holder.disposables.clear()
         GlideApp.with(holder.itemView).clear(holder.itemView.image_view_event_image)
+        holder.itemView.image_view_event_image
+                .setImageResource(R.drawable.ic_sentiment_satisfied_24dp)
     }
 
     inner class VenueViewHolder(private val venueItemView: View,
