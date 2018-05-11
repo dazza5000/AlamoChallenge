@@ -1,4 +1,4 @@
-package com.amicly.alamofoursquare.search
+package com.amicly.alamofoursquare.venuesearch
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

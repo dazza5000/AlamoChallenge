@@ -1,10 +1,10 @@
-package com.amicly.alamofoursquare.search
+package com.amicly.alamofoursquare.venuesearch
 
 import com.amicly.alamofoursquare.model.venue.Venue
 import com.amicly.playerbase.base.mvp.BaseContract
 
 interface SearchContract {
-    interface Presenter {
+    interface Presenter : BaseContract.Presenter {
         fun selectEvent(venue: Venue)
         fun searchQueryUpdated(newText: String)
     }

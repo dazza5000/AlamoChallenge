@@ -1,9 +1,9 @@
-package com.amicly.alamofoursquare.search
+package com.amicly.alamofoursquare.venuesearch
 
 import com.amicly.alamofoursquare.common.scheduler.SchedulerProvider
 import com.amicly.alamofoursquare.data.remote.FourSquareService
-import com.amicly.alamofoursquare.model.venue.VenueSearchResult
 import com.amicly.alamofoursquare.model.venue.Venue
+import com.amicly.alamofoursquare.model.venue.VenueSearchResult
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
@@ -43,6 +43,7 @@ class SearchPresenter @Inject constructor(private val view : SearchContract.View
 
                     }
                 })
+        searchStringSubject.onNext("Alamo Drafthouse")
     }
 
     private fun performSearch(searchQuery: String) {

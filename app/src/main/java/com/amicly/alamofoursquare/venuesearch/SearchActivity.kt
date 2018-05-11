@@ -1,4 +1,4 @@
-package com.amicly.alamofoursquare.search
+package com.amicly.alamofoursquare.venuesearch
 
 import android.os.Bundle
 import android.support.v7.widget.SearchView

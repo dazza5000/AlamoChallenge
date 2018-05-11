@@ -2,10 +2,10 @@ package com.amicly.alamofoursquare.di.module
 
 import com.amicly.alamofoursquare.data.remote.FourSquareService
 import com.amicly.alamofoursquare.model.venue.Venue
-import com.amicly.alamofoursquare.search.SearchActivity
-import com.amicly.alamofoursquare.search.SearchContract
-import com.amicly.alamofoursquare.search.SearchPresenter
-import com.amicly.alamofoursquare.search.VenueRecyclerAdapter
+import com.amicly.alamofoursquare.venuesearch.SearchActivity
+import com.amicly.alamofoursquare.venuesearch.SearchContract
+import com.amicly.alamofoursquare.venuesearch.SearchPresenter
+import com.amicly.alamofoursquare.venuesearch.VenueRecyclerAdapter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

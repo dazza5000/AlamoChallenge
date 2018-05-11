@@ -1,7 +1,7 @@
 package com.amicly.alamofoursquare.di.module
 
 import com.amicly.alamofoursquare.di.scope.ActivityScoped
-import com.amicly.alamofoursquare.search.SearchActivity
+import com.amicly.alamofoursquare.venuesearch.SearchActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
