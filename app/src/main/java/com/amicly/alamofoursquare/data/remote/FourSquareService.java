@@ -1,15 +1,22 @@
 package com.amicly.alamofoursquare.data.remote;
 
-import com.amicly.alamofoursquare.model.FourSquareVenueSearchResult;
+import com.amicly.alamofoursquare.model.photo.PhotoSearchResult;
+import com.amicly.alamofoursquare.model.venue.VenueSearchResult;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface FourSquareService {
 
-    public static final String SEARCH_NEAR_AUSTIN = "venues/search?near=Austin,TX";
+    String VENUES = "venues";
+    String SEARCH_NEAR_AUSTIN = VENUES + "/search?near=Austin,TX";
+    String PHOTOS = VENUES + "/{venueId}/photos";
 
     @GET(SEARCH_NEAR_AUSTIN)
-    Single<FourSquareVenueSearchResult> searchEvents(@Query("query") String searchQuery);
+    Single<VenueSearchResult> searchEvents(@Query("query") String searchQuery);
+
+    @GET(PHOTOS)
+    Single<PhotoSearchResult> getPhotos(@Path("venueId") String venueId);
 }

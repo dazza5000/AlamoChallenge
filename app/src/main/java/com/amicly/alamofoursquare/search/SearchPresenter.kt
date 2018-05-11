@@ -2,8 +2,8 @@ package com.amicly.alamofoursquare.search
 
 import com.amicly.alamofoursquare.common.scheduler.SchedulerProvider
 import com.amicly.alamofoursquare.data.remote.FourSquareService
-import com.amicly.alamofoursquare.model.FourSquareVenueSearchResult
-import com.amicly.alamofoursquare.model.Venue
+import com.amicly.alamofoursquare.model.venue.VenueSearchResult
+import com.amicly.alamofoursquare.model.venue.Venue
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
@@ -50,13 +50,13 @@ class SearchPresenter @Inject constructor(private val view : SearchContract.View
         fourSquareService.searchEvents(searchQuery)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.mainThread())
-                .subscribe(object : DisposableSingleObserver<FourSquareVenueSearchResult>() {
+                .subscribe(object : DisposableSingleObserver<VenueSearchResult>() {
                     override fun onStart() {
                         super.onStart()
                         apiDisposable.add(this)
                     }
 
-                    override fun onSuccess(searchResult: FourSquareVenueSearchResult) {
+                    override fun onSuccess(searchResult: VenueSearchResult) {
                             searchResult.response?.venues?.run {
                                 view.showVenues(this)
                             }

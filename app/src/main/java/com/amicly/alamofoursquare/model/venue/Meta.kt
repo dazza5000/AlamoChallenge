@@ -1,4 +1,4 @@
-package com.amicly.alamofoursquare.model
+package com.amicly.alamofoursquare.model.venue
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

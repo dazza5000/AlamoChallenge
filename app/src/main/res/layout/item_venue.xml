@@ -21,20 +21,21 @@
 
         <TextView
             style="@style/TextAppearance.AppCompat.Title"
-            android:id="@+id/text_view_event_name"
+            android:id="@+id/text_view_venue_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"/>
         <TextView
             style="@style/TextAppearance.AppCompat.Medium"
-            android:id="@+id/text_view_event_location"
+            android:id="@+id/text_view_venue_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             style="@style/TextAppearance.AppCompat.Medium"
-            android:id="@+id/text_view_event_date"
+            android:id="@+id/text_view_event_url"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:autoLink="web"/>
     </LinearLayout>
 </LinearLayout>
 
