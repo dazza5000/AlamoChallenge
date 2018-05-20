@@ -43,7 +43,6 @@ class VenueSearchPresenter @Inject constructor(private val view : VenueSearchCon
 
                     }
                 })
-        searchStringSubject.onNext("Alamo Drafthouse")
     }
 
     private fun performSearch(searchQuery: String) {
@@ -76,5 +75,9 @@ class VenueSearchPresenter @Inject constructor(private val view : VenueSearchCon
 
     override fun selectEvent(venue: Venue) {
 
+    }
+
+    override fun mapClicked() {
+        view.navigateToMapView()
     }
 }

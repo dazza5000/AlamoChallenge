@@ -3,6 +3,7 @@
     package="com.amicly.alamofoursquare">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".AlamoFourSquareApplication"
@@ -19,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".venuedetail.VenueDetailActivity"></activity>
+        <activity android:name=".venuedetail.VenueDetailActivity" />
+        <activity android:name=".venuemap.VenueMapActivity"></activity>
     </application>
 
 </manifest>

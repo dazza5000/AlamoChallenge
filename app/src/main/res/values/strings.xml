@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AlamoFourSquare</string>
     <string name="search">Search</string>
+    <string name="access_token">pk.eyJ1IjoiZGFycmFuIiwiYSI6ImNqaGU5aDhwdDB5a2IzOXMyN2JuemJvb3MifQ.QXI6YoB5sL0ir3_L-4V-rQ</string>
 </resources>

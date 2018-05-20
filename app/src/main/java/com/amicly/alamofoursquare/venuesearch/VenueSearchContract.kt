@@ -7,8 +7,10 @@ interface VenueSearchContract {
     interface Presenter : BaseContract.Presenter {
         fun selectEvent(venue: Venue)
         fun searchQueryUpdated(newText: String)
+        fun mapClicked()
     }
     interface View : BaseContract.View {
         fun showVenues(venues: List<Venue>)
+        fun navigateToMapView()
     }
 }

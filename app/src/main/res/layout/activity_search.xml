@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +8,7 @@
     tools:context=".venuesearch.VenueSearchActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_venues"
+        android:id="@+id/recycler_view_venues"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,4 +17,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_action_button_venue_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_map_black_24dp"/>
 </android.support.constraint.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.amicly.alamofoursquare.R
 import com.amicly.alamofoursquare.common.image.GlideApp
 import com.amicly.alamofoursquare.data.remote.FourSquareService
+import com.amicly.alamofoursquare.inflate
 import com.amicly.alamofoursquare.model.photo.Item
 import com.amicly.alamofoursquare.model.photo.PhotoSearchResult
 import com.amicly.alamofoursquare.model.venue.Venue
@@ -25,8 +26,7 @@ class VenueRecyclerAdapter (private var venues: List<Venue>,
     : RecyclerView.Adapter<VenueRecyclerAdapter.VenueViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VenueViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_venue, parent,
-                false)
+        val view = parent.inflate(R.layout.item_venue)
         return VenueViewHolder(view, venueClickListener)
     }
 
@@ -53,7 +53,8 @@ class VenueRecyclerAdapter (private var venues: List<Venue>,
     }
 
     inner class VenueViewHolder(private val venueItemView: View,
-                                private val venueClickListener: VenueClickListener) : RecyclerView.ViewHolder(venueItemView) {
+                                private val venueClickListener: VenueClickListener)
+        : RecyclerView.ViewHolder(venueItemView) {
 
         val disposables : CompositeDisposable = CompositeDisposable()
 
@@ -72,19 +73,19 @@ class VenueRecyclerAdapter (private var venues: List<Venue>,
 
         private fun loadPhotoResult(photoSearchResult: PhotoSearchResult) {
 
-            if (photoSearchResult.response.photos.count > 0) {
+            photoSearchResult.response?.photos?.items?.let {
+                if (it.isEmpty()) return
                 GlideApp.with(venueItemView.context)
                         .load(getImageUrlFromSearchResult(photoSearchResult))
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .transforms(CenterCrop(), RoundedCorners(7))
                         .into(venueItemView.image_view_event_image)
             }
-
         }
 
         private fun getImageUrlFromSearchResult(photoSearchResult: PhotoSearchResult) : String {
 
-            var photoItem : Item = photoSearchResult.response.photos.items[0]
+            var photoItem : Item = photoSearchResult.response?.photos?.items?.get(0) ?: Item()
             var imageUrl = ""
             imageUrl += photoItem.prefix + "300" + photoItem.suffix
             return imageUrl
