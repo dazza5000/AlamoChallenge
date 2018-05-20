@@ -12,10 +12,16 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import android.opengl.ETC1.getHeight
+import android.opengl.ETC1.getWidth
+
+
 
 
 class VenueMapActivity: BaseActivity(), VenueMapContract.View, OnMapReadyCallback {
@@ -39,9 +45,16 @@ class VenueMapActivity: BaseActivity(), VenueMapContract.View, OnMapReadyCallbac
 
     override fun onMapReady(mapboxMap: MapboxMap) {
         this.mapboxMap = mapboxMap
-        /* Image: An image is loaded and added to the map. */
-        val icon = BitmapFactory.decodeResource(resources, R.drawable.custom_marker)
-        mapboxMap.addImage(MARKER_IMAGE, icon)
+
+        val drawable: Drawable = resources.getDrawable(R.drawable.ic_sentiment_satisfied_24dp, null)
+
+        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight,
+                Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+
+        mapboxMap.addImage(MARKER_IMAGE, bitmap)
         addMarkers()
     }
 
