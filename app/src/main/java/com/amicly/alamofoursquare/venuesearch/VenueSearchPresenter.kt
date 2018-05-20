@@ -57,14 +57,20 @@ class VenueSearchPresenter @Inject constructor(private val view : VenueSearchCon
                     }
 
                     override fun onSuccess(searchResult: VenueSearchResult) {
-                            searchResult.response?.venues?.run {
-                                view.showVenues(this)
+                            searchResult.response?.venues?.let {
+                                view.showVenues(it)
+                                if (it.isNotEmpty()) {
+                                    view.showMapButton(true)
+                                } else {
+                                    view.showMapButton(false)
+                                }
                             }
                     }
 
                     override fun onError(e: Throwable) {
                         Timber.e(e)
                         view.showNotification(e.toString())
+                        view.showMapButton(false)
                     }
                 })
     }
@@ -78,6 +84,6 @@ class VenueSearchPresenter @Inject constructor(private val view : VenueSearchCon
     }
 
     override fun mapClicked() {
-        view.navigateToMapView()
+        view.navigateToMapView(searchStringSubject.value.toString())
     }
 }

@@ -19,8 +19,8 @@ class VenueMapPresenter @Inject constructor(private val view : VenueMapContract.
                                             private val schedulerProvider: SchedulerProvider):
         VenueMapContract.Presenter {
 
-    init {
-        fourSquareService.searchEvents("asdf")
+    override fun searchVenues(searchString: String) {
+        fourSquareService.searchEvents(searchString)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.mainThread())
                 .subscribe(object : DisposableSingleObserver<VenueSearchResult>() {

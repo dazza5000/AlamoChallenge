@@ -93,6 +93,6 @@ class VenueRecyclerAdapter (private var venues: List<Venue>,
     }
 
     interface VenueClickListener {
-        fun onVenueClick(event: Venue)
+        fun onVenueClick(venue: Venue)
     }
 }

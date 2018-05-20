@@ -11,6 +11,7 @@ interface VenueSearchContract {
     }
     interface View : BaseContract.View {
         fun showVenues(venues: List<Venue>)
-        fun navigateToMapView()
+        fun navigateToMapView(searchString: String)
+        fun showMapButton(show: Boolean)
     }
 }

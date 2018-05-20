@@ -5,7 +5,9 @@ import com.amicly.playerbase.base.mvp.BaseContract
 
 interface VenueMapContract {
     interface View : BaseContract.View {
-        fun showVenues(venus: List<Venue>)
+        fun showVenues(venues: List<Venue>)
     }
-    interface Presenter : BaseContract.Presenter {}
+    interface Presenter : BaseContract.Presenter {
+        fun searchVenues(searchString: String)
+    }
 }

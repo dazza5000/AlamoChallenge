@@ -1,37 +1,33 @@
 package com.amicly.alamofoursquare.venuemap
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.amicly.alamofoursquare.R
 import com.amicly.alamofoursquare.model.venue.Venue
-import com.amicly.alamofoursquare.venuemap.VenueMapContract
 import com.amicly.playerbase.base.mvp.BaseActivity
 import com.mapbox.geojson.Feature
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
-import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
+import com.mapbox.geojson.FeatureCollection
 import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
-
-
+import javax.inject.Inject
 
 
 class VenueMapActivity: BaseActivity(), VenueMapContract.View, OnMapReadyCallback {
 
+    @Inject lateinit var venueMapPresenter: VenueMapPresenter
+
     private lateinit var mapView: MapView
     private lateinit var mapboxMap: MapboxMap
-
-    private val MARKER_SOURCE = "markers-source"
-    private val MARKER_STYLE_LAYER = "markers-style-layer"
-    private val MARKER_IMAGE = "custom-marker"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +37,10 @@ class VenueMapActivity: BaseActivity(), VenueMapContract.View, OnMapReadyCallbac
         mapView = findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
+
+        intent.getStringExtra(EXTRA_SEARCH_STRING)?.let {
+            venueMapPresenter.searchVenues(it)
+        }
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
@@ -55,12 +55,19 @@ class VenueMapActivity: BaseActivity(), VenueMapContract.View, OnMapReadyCallbac
         drawable.draw(canvas)
 
         mapboxMap.addImage(MARKER_IMAGE, bitmap)
-        addMarkers()
     }
 
-    private fun addMarkers() {
-        val source = GeoJsonSource(MARKER_SOURCE,
-                Feature.fromGeometry(Point.fromLngLat(2.0, 2.0)))
+    private fun addMarkers(venues: List<Venue>) {
+        val features: ArrayList<Feature> = ArrayList()
+        for (venue in venues) {
+            venue.location?.let {
+                features.add(Feature.fromGeometry(Point.fromLngLat(it.lng,
+                        it.lat)).apply { addStringProperty("venueId", venue.id) })
+            }
+        }
+
+        val featureCollection: FeatureCollection = FeatureCollection.fromFeatures(features)
+        val source = GeoJsonSource(MARKER_SOURCE, featureCollection)
         mapboxMap.addSource(source)
         val markerStyleLayer: SymbolLayer = SymbolLayer(MARKER_STYLE_LAYER, MARKER_SOURCE)
                 .withProperties(
@@ -105,7 +112,22 @@ class VenueMapActivity: BaseActivity(), VenueMapContract.View, OnMapReadyCallbac
         mapView.onSaveInstanceState(outState)
     }
 
-    override fun showVenues(venus: List<Venue>) {
+    override fun showVenues(venues: List<Venue>) {
+        addMarkers(venues)
+    }
+
+    companion object {
+
+        private const val EXTRA_SEARCH_STRING = "searchString"
+        private const val MARKER_SOURCE = "markers-source"
+        private const val MARKER_STYLE_LAYER = "markers-style-layer"
+        private const val MARKER_IMAGE = "custom-marker"
+
+        fun startVenueMapActivity(context: Context, searchString: String) {
+            val intent = Intent(context, VenueMapActivity::class.java)
+            intent.putExtra(EXTRA_SEARCH_STRING, searchString)
+            context.startActivity(intent)
+        }
 
     }
 }

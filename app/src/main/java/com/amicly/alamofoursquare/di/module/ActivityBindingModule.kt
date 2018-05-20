@@ -18,6 +18,6 @@ abstract class ActivityBindingModule {
     internal abstract fun searchActivity(): VenueSearchActivity
 
     @ActivityScoped
-    @ContributesAndroidInjector(modules = [(SearchModule::class)])
+    @ContributesAndroidInjector(modules = [(VenueMapModule::class)])
     internal abstract fun venueMapActivity(): VenueMapActivity
 }
