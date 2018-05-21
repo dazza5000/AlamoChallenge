@@ -1,4 +1,4 @@
-package com.amicly.alamofoursquare.venuemap
+package com.amicly.alamofoursquare.venuesearchmap
 
 import com.amicly.alamofoursquare.model.venue.Venue
 import com.amicly.playerbase.base.mvp.BaseContract

@@ -1,9 +1,7 @@
 package com.amicly.alamofoursquare.di.module
 
-import com.amicly.alamofoursquare.venuemap.VenueMapActivity
-import com.amicly.alamofoursquare.venuemap.VenueMapContract
-import com.amicly.alamofoursquare.venuesearch.VenueSearchActivity
-import com.amicly.alamofoursquare.venuesearch.VenueSearchContract
+import com.amicly.alamofoursquare.venuesearchmap.VenueMapActivity
+import com.amicly.alamofoursquare.venuesearchmap.VenueMapContract
 import dagger.Binds
 import dagger.Module
 

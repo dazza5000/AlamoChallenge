@@ -65,10 +65,13 @@ class VenueRecyclerAdapter (private var venues: List<Venue>,
 
             venueItemView.setOnClickListener { _ -> venueClickListener.onVenueClick(venue) }
 
-            disposables.add(fourSquareService.getPhotos(venue.id)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(Consumer { loadPhotoResult( it ) }))
+
+            venue.id?.let {
+                disposables.add(fourSquareService.getPhotos(it)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(Consumer { loadPhotoResult(it) }))
+            }
         }
 
         private fun loadPhotoResult(photoSearchResult: PhotoSearchResult) {

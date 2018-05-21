@@ -1,4 +1,4 @@
-package com.amicly.alamofoursquare.venuemap
+package com.amicly.alamofoursquare.venuesearchmap
 
 import android.content.Context
 import android.content.Intent
@@ -14,7 +14,6 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import com.mapbox.geojson.BoundingBox
 import com.mapbox.geojson.FeatureCollection
 import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
@@ -94,7 +93,7 @@ class VenueMapActivity: BaseActivity(), VenueMapContract.View, OnMapReadyCallbac
     }
 
     private fun configureMapBoxMap(mapboxMap: MapboxMap) {
-        val drawable: Drawable = resources.getDrawable(R.drawable.ic_sentiment_satisfied_24dp, null)
+        val drawable: Drawable = resources.getDrawable(R.drawable.ic_sentiment_satisfied_triad_24dp, null)
 
         val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight,
                 Bitmap.Config.ARGB_8888)
@@ -114,12 +113,11 @@ class VenueMapActivity: BaseActivity(), VenueMapContract.View, OnMapReadyCallbac
                 features.add(Feature.fromGeometry(point).apply {
                     addStringProperty("venueId", venue.id)
                 })
-                latLngs.add(LatLng(it.lng, it.lat))
+                latLngs.add(LatLng(it.lat, it.lng))
             }
         }
 
-        val featureCollection: FeatureCollection = FeatureCollection.fromFeatures(features,
-                findBoundingBoxForGivenLocations(points))
+        val featureCollection: FeatureCollection = FeatureCollection.fromFeatures(features)
         val source = GeoJsonSource(MARKER_SOURCE, featureCollection)
         mapboxMap.addSource(source)
         val markerStyleLayer: SymbolLayer = SymbolLayer(MARKER_STYLE_LAYER, MARKER_SOURCE)
@@ -129,11 +127,10 @@ class VenueMapActivity: BaseActivity(), VenueMapContract.View, OnMapReadyCallbac
                 )
         mapboxMap.addLayer(markerStyleLayer)
         mapboxMap.moveCamera(CameraUpdateFactory.newLatLngBounds(
-                LatLngBounds.Builder().includes(latLngs).build(), 7))
+                LatLngBounds.Builder().includes(latLngs).build(), 77))
     }
 
     companion object {
-
         private const val EXTRA_SEARCH_STRING = "searchString"
         private const val MARKER_SOURCE = "markers-source"
         private const val MARKER_STYLE_LAYER = "markers-style-layer"
@@ -144,35 +141,5 @@ class VenueMapActivity: BaseActivity(), VenueMapContract.View, OnMapReadyCallbac
             intent.putExtra(EXTRA_SEARCH_STRING, searchString)
             context.startActivity(intent)
         }
-
-    }
-
-    fun findBoundingBoxForGivenLocations(points: ArrayList<Point>): BoundingBox {
-        var west = 0.0
-        var east = 0.0
-        var north = 0.0
-        var south = 0.0
-
-        for (point in points) {
-
-            if (point.latitude() > north) {
-                north = point.latitude()
-            } else if (point.latitude() < south) {
-                south = point.latitude()
-            }
-            if (point.longitude() < west) {
-                west = point.longitude()
-            } else if (point.longitude() > east) {
-                east = point.longitude()
-            }
-        }
-
-        val padding = 0.07
-        north += padding
-        south -= padding
-        west -= padding
-        east += padding
-
-        return BoundingBox.fromCoordinates(west, south, east, north)
     }
 }

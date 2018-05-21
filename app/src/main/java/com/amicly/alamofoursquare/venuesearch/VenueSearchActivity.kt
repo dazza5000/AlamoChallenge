@@ -3,10 +3,10 @@ package com.amicly.alamofoursquare.venuesearch
 import android.os.Bundle
 import android.support.v7.widget.SearchView
 import android.view.Menu
-import android.view.View
 import com.amicly.alamofoursquare.R
 import com.amicly.alamofoursquare.model.venue.Venue
-import com.amicly.alamofoursquare.venuemap.VenueMapActivity
+import com.amicly.alamofoursquare.venuedetail.VenueDetailActivity
+import com.amicly.alamofoursquare.venuesearchmap.VenueMapActivity
 import com.amicly.alamofoursquare.visibleOrGone
 import com.amicly.playerbase.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.activity_search.*
@@ -53,5 +53,9 @@ class VenueSearchActivity : BaseActivity(), VenueSearchContract.View {
 
     override fun showMapButton(show: Boolean) {
         floating_action_button_venue_search.visibleOrGone(show)
+    }
+
+    override fun navigateToDetailView(venueId: String) {
+        VenueDetailActivity.startVenueDetailActivity(this, venueId)
     }
 }

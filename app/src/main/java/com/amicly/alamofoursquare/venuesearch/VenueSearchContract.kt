@@ -13,5 +13,6 @@ interface VenueSearchContract {
         fun showVenues(venues: List<Venue>)
         fun navigateToMapView(searchString: String)
         fun showMapButton(show: Boolean)
+        fun navigateToDetailView(venueId: String)
     }
 }

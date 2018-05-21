@@ -1,16 +1,10 @@
-package com.amicly.alamofoursquare.venuemap
+package com.amicly.alamofoursquare.venuesearchmap
 
 import com.amicly.alamofoursquare.common.scheduler.SchedulerProvider
 import com.amicly.alamofoursquare.data.remote.FourSquareService
-import com.amicly.alamofoursquare.model.venue.Venue
 import com.amicly.alamofoursquare.model.venue.VenueSearchResult
-import com.amicly.alamofoursquare.venuesearch.VenueSearchContract
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
